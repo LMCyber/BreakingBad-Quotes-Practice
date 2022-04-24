@@ -32,13 +32,17 @@ export const AddForm = ({ handleAddQuote }) => {
           value={author}
         />
 
-        <Button
-          type='submit'
-          variant='primary'
-          className='mt-2'
-        >Add
-        </Button>
+        <div className='d-grid'>
 
+          <Button
+            type='submit'
+            variant='primary'
+            className='mt-2'
+            size='lg'
+          >Add
+          </Button>
+
+        </div>
       </Form>
     </>
   )
