@@ -1,7 +1,8 @@
 import { useReducer } from 'react'
 import { AddForm } from './components/AddForm'
 import { QuotesList } from './components/QuotesList'
-import { useFetch } from './hooks/useFetch'
+import { getQuote } from './helpers/getQuote'
+
 import { quoteReducer } from './reducers/quoteReducer'
 
 const initialState = [{
@@ -13,12 +14,18 @@ const initialState = [{
 function App () {
   const [quotes, dispatch] = useReducer(quoteReducer, initialState)
 
-  const url = 'https://www.breakingbadapi.com/api/quote?author=Walter+White'
-  const { loading, data } = useFetch(url)
+  getQuote()
+
+  const handleAddQuote = (newQuote) => {
+    dispatch({
+      type: 'add',
+      payload: newQuote
+    })
+  }
 
   return (
     <div className='container mt-3'>
-      <h1>Breaking Bad Quotes</h1>
+      <h1>Breaking Bad Quotes ({quotes.length})</h1>
       <hr />
 
       <div className='row'>
@@ -27,7 +34,7 @@ function App () {
         </div>
 
         <div className='col-5'>
-          <AddForm />
+          <AddForm handleAddQuote={handleAddQuote} />
         </div>
 
       </div>

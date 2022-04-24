@@ -1,18 +1,23 @@
 import { Button, Form } from 'react-bootstrap'
+import { getQuote } from '../helpers/getQuote'
 import { useForm } from '../hooks/useForm'
 
-export const AddForm = () => {
+export const AddForm = ({ handleAddQuote }) => {
   const [{ author }, handleInputChange, reset] = useForm({
     author: ''
   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(author)
+    const newQuote = await getQuote(author)
 
-    reset()
+    if (newQuote) {
+      handleAddQuote(newQuote)
+      reset()
+    }
   }
+
   return (
     <>
       <h4>Add Quote</h4>

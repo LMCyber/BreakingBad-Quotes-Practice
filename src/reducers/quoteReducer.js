@@ -1,6 +1,6 @@
 
 export const quoteReducer = (state = [], action) => {
-  switch (state) {
+  switch (action.type) {
     case 'add':
       return [...state, action.payload]
 
